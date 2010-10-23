@@ -1,0 +1,8 @@
+.project
+build/export
+build/logs
+build/settings/user.properties
+build/unit
+google/config/settings.json.cfm
+google/config/version.json.cfm
+dist/
