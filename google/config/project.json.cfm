@@ -9,6 +9,7 @@
 		]
 	},
 	"key": "google",
+	"plugin": "Google",
 	"prerequisites": {
 	},
 	"requestSingletons": {
