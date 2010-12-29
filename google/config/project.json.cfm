@@ -11,6 +11,7 @@
 	"key": "google",
 	"plugin": "Google",
 	"prerequisites": {
+		"algid": "0.1.3"
 	},
 	"requestSingletons": {
 	},
