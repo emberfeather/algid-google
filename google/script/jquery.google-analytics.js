@@ -50,9 +50,8 @@
  *       Idea for trackPage method came from this blog post: http://lyncd.com/2009/03/better-google-analytics-javascript/
  */
 (function($) {
-
 	var pageTracker;
-
+	
 	/**
 	 * Enables Google Analytics tracking on the page from which it's called.
 	 * 
@@ -71,23 +70,22 @@
 	 * 
 	 */
 	$.trackPage = function(account_id, options) {
-		var host = (("https:" === document.location.protocol) ? "https://ssl."
-				: "http://www.");
+		var host = ( "https:" === document.location.protocol ? "https://ssl." : "http://www.");
 		var script;
-
+		
 		// Use default options, if necessary
 		var settings = $.extend({}, {
 			onload : true,
 			status_code : 200
 		}, options);
 		var src = host + 'google-analytics.com/ga.js';
-
+		
 		function init_analytics() {
 			if (typeof _gat !== undefined) {
 				debug('Google Analytics loaded');
-
+				
 				pageTracker = _gat._getTracker(account_id);
-
+				
 				if (settings.status_code === null || settings.status_code === 200) {
 					pageTracker._trackPageview();
 				} else {
@@ -104,7 +102,7 @@
 				throw "_gat is undefined"; // setInterval loading?
 			}
 		}
-
+		
 		load_script = function() {
 			$.ajax({
 				type : "GET",
@@ -117,7 +115,7 @@
 			// We want the cached version
 			});
 		};
-
+		
 		// Enable tracking when called or on page load?
 		if (settings.onload === true || settings.onload === null) {
 			$(window).load(load_script);
@@ -125,7 +123,7 @@
 			load_script();
 		}
 	};
-
+	
 	/**
 	 * Tracks an event using the given parameters.
 	 * 
@@ -145,7 +143,7 @@
 			pageTracker._trackEvent(category, action, label, value);
 		}
 	};
-
+	
 	/**
 	 * Tracks a pageview using the given uri.
 	 * 
@@ -157,7 +155,7 @@
 			pageTracker._trackPageview(uri);
 		}
 	};
-
+	
 	/**
 	 * Adds click tracking to elements. Usage:
 	 * 
@@ -168,48 +166,50 @@
 		// Add event handler to all matching elements
 		return this.each(function() {
 			var element = $(this);
-
+			
 			// Prevent an element from being tracked multiple times.
 			if (element.hasClass('tracked')) {
 				return false;
 			} else {
 				element.addClass('tracked');
 			}
-
+			
 			// Use default options, if necessary
 			var settings = $.extend({}, $.fn.track.defaults, options);
-
+			
 			// Merge custom options with defaults.
 			var category = evaluate(element, settings.category);
 			var action = evaluate(element, settings.action);
 			var label = evaluate(element, settings.label);
 			var value = evaluate(element, settings.value);
 			var event_name = evaluate(element, settings.event_name);
-
-			var message = "category:'" + category + "' action:'" + action +
-					"' label:'" + label + "' value:'" + value + "'";
-
+			
+			var message = "category:'" + category +
+					"' action:'" + action +
+					"' label:'" + label +
+					"' value:'" + value + "'";
+			
 			debug('Tracking ' + event_name + ' ' + message);
-
+			
 			// Bind the event to this element.
 			// TODO Use .live since jQuery 1.4 now supports it better.
 			element.bind(event_name + '.track', function() {
 				// Should we skip internal links? REFACTOR
 				var skip = settings.skip_internal &&
 						(element[0].hostname === location.hostname);
-
+				
 				if (!skip) {
 					$.trackEvent(category, action, label, value);
 					debug('Tracked ' + message);
 				} else {
 					debug('Skipped ' + message);
 				}
-
+				
 				return true;
 			});
 		});
 	};
-
+	
 	/**
 	 * Prints to Firebug console, if available. To enable:
 	 * $.fn.track.defaults.debug = true;
@@ -221,7 +221,7 @@
 			console.debug(message);
 		}
 	}
-
+	
 	/**
 	 * Checks whether a setting value is a string or a function.
 	 * 
@@ -235,14 +235,13 @@
 		}
 		return text_or_function;
 	}
-
+	
 	/**
 	 * Default (overridable) settings.
 	 */
 	$.fn.track.defaults = {
 		category : function(element) {
-			return (element[0].hostname === location.hostname) ? 'internal'
-					: 'external';
+			return element[0].hostname === location.hostname ? 'internal' : 'external';
 		},
 		action : 'click',
 		label : function(element) {
