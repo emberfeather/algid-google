@@ -20,15 +20,33 @@ var _gaq = _gaq || [];
 	
 	$(function (){
 		settings = $.extend({}, {
-			account_id: 'UA-xxx-xxx',
+			account: 'UA-xxx-xxx',
 			callback: undefined
 		}, $.track.settings);
 		
-		$.track('_setAccount', settings.account_id);
+		$.track('_setAccount', settings.account);
+		
+		if(settings.domainName) {
+			$.track('_setDomainName', settings.domainName);
+		}
+		
+		if(settings.allowHash) {
+			$.track('_setAllowHash', settings.allowHash);
+		}
+		
+		if(settings.allowLinker) {
+			$.track('_setAllowLinker', settings.allowLinker);
+		}
+		
+		$.track('_trackPageview');
 		
 		$.ajax({
 			type : "GET",
-			url : ("https:" === document.location.protocol ? "https://ssl." : "http://www." ) +
+			url : (
+					"https:" === document.location.protocol ?
+					"https://ssl." :
+					"http://www."
+				) +
 				'google-analytics.com/ga.js',
 			success : settings.callback,
 			dataType : "script",
