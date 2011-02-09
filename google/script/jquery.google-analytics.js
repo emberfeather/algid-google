@@ -65,12 +65,20 @@ var _gaq = _gaq || [];
 	 * commandName - string. Name of the command to push
 	 * [arguments] - any. Additional arguments to be passed to the command
 	 */
-	$.track = function(commandName) {
-		var args = Array.prototype.slice.call(arguments);
+	$.track = function(command) {
+		var args;
 		
-		debug('Tracking: ' + args);
-		
-		_gaq.push(args);
+		if($.isFunction(command)) {
+			debug('Tracking: [function]');
+			
+			_gaq.push(command);
+		} else {
+			args = Array.prototype.slice.call(arguments);
+			
+			debug('Tracking: ' + args);
+			
+			_gaq.push(args);
+		}
 	};
 	
 	$.track.settings = {};
