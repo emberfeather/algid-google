@@ -1,0 +1,3 @@
+var _gaq=_gaq||[];
+(function(a){var b;a(function(){b=a.extend({},{account:"UA-xxx-xxx",callback:undefined},a.track.settings);a.track("_setAccount",b.account);b.domainName&&a.track("_setDomainName",b.domainName);b.allowHash&&a.track("_setAllowHash",b.allowHash);b.allowLinker&&a.track("_setAllowLinker",b.allowLinker);a.track("_trackPageview");a.ajax({type:"GET",url:("https:"===document.location.protocol?"https://ssl.":"http://www.")+"google-analytics.com/ga.js",success:b.callback,dataType:"script",cache:true})});a.track=
+function(c){a.isFunction(c)?_gaq.push(c):_gaq.push(Array.prototype.slice.call(arguments))};a.track.settings={}})(jQuery);
