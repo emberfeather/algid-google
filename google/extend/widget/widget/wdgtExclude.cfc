@@ -12,6 +12,11 @@ component extends="plugins.widget.inc.resource.base.widget" {
 		
 		try {
 			// Check if can exclude from analytics
+			local.plugin = variables.transport.theApplication.managers.plugin.get('google');
+			local.observerManager = local.plugin.getObserver();
+			local.observer = observerManager.get('analytics');
+			
+			local.observer.beforeExclude(variables.transport);
 			
 			// Check for exclusion flag
 			if(local.theUrl.searchBoolean('exclude')) {
@@ -27,9 +32,9 @@ component extends="plugins.widget.inc.resource.base.widget" {
 			local.theUrl.setExclude('exclude', 'true');
 			local.theUrl.setInclude('include', 'true');
 			
-			return '<a href="' & local.theUrl.getExclude() & '">Exclude</a> this browser from analytics. OR <a href="' & local.theUrl.getInclude() & '">include</a> this browser in analytics.';
+			return '<a href="' & local.theUrl.getExclude() & '">Exclude</a> this browser from analytics OR <a href="' & local.theUrl.getInclude() & '">Include</a> this browser in analytics.';
 		} catch (validation e) {
-			return '';
+			return e.message;
 		}
 	}
 }
