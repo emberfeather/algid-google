@@ -16,26 +16,9 @@ var _gaq = _gaq || [];
 	var settings;
 	
 	$(function (){
-		settings = $.extend({}, {
-			account: 'UA-xxx-xxx',
+		settings = $.extend({
 			callback: undefined
 		}, $.track.settings);
-		
-		$.track('_setAccount', settings.account);
-		
-		if(settings.domainName) {
-			$.track('_setDomainName', settings.domainName);
-		}
-		
-		if(settings.allowHash) {
-			$.track('_setAllowHash', settings.allowHash);
-		}
-		
-		if(settings.allowLinker) {
-			$.track('_setAllowLinker', settings.allowLinker);
-		}
-		
-		$.track('_trackPageview');
 		
 		$.ajax({
 			type : "GET",
@@ -58,7 +41,7 @@ var _gaq = _gaq || [];
 	 *     - http://code.google.com/apis/analytics/docs/gaJS/gaJSApi.html
 	 * 
 	 * commandName - string or function. Name of the command to push or a function to push
-	 * [arguments] - any. Additional arguments to be passed to the command
+	 * [arguments]* - any. Additional arguments to be passed to the command
 	 */
 	$.track = function(command) {
 		if($.isFunction(command)) {
