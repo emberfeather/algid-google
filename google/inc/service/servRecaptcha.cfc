@@ -13,7 +13,7 @@
 		</cfhttp>
 		
 		<cfif local.result.status_code neq 200>
-			<cfthrow type="validation" message="ReCaptcha request failed" detail="Unable to verify the ReCaptcha response with the ReCaptcha Server" />
+			<cfthrow type="validation" message="ReCaptcha request failed" detail="Unable to verify the ReCaptcha response with the ReCaptcha Server" errorcode="recaptcha-not-reachable" />
 		</cfif>
 		
 		<cfif listFirst(local.result.fileContent, chr(10)) neq true>
