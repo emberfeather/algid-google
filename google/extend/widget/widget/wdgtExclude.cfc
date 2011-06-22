@@ -20,12 +20,16 @@ component extends="plugins.widget.inc.resource.base.widget" {
 			
 			// Check for exclusion flag
 			if(local.theUrl.searchBoolean('exclude')) {
-				return 'Marking browser as <strong>excluded</strong>. <script>jQuery(function() { jQuery.track(''_setCustomVar'', 5, ''_exclude'', true, 1); jQuery.track(''_trackPageview''); });</script>';
+				addScript('jQuery(function() { jQuery.track(''_setCustomVar'', 5, ''_exclude'', true, 1); jQuery.track(''_trackPageview''); });');
+				
+				return 'Marking browser as <strong>excluded</strong>.';
 			}
 			
 			// Check for inclusion flag
 			if(local.theUrl.searchBoolean('include')) {
-				return 'Marking browser as <strong>included</strong>. <script>jQuery(function() { jQuery.track(''_setCustomVar'', 5, ''_exclude'', false, 1); jQuery.track(''_trackPageview''); });</script>';
+				addScript('jQuery(function() { jQuery.track(''_setCustomVar'', 5, ''_exclude'', false, 1); jQuery.track(''_trackPageview''); });');
+				
+				return 'Marking browser as <strong>included</strong>.';
 			}
 			
 			// Show options of including/excluding
