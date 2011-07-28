@@ -26,9 +26,6 @@
 					element.data('options') || {},
 					{ center: latlng });
 			
-			console.log(element.data('options'));
-			console.log(options);
-			
 			var map = new google.maps.Map(this, options);
 			
 			var marker = new google.maps.Marker({
