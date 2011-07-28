@@ -2,6 +2,7 @@
 	"applicationSingletons": {
 	},
 	"applicationTransients": {
+		"formElementForGoogle": "plugins.google.inc.resource.structure.form.google"
 	},
 	"i18n": {
 		"locales": [
