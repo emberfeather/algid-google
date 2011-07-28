@@ -1,4 +1,12 @@
 component extends="plugins.widget.inc.resource.base.widget" {
+	public component function init(required struct transport) {
+		super.init(arguments.transport);
+		
+		preventCaching();
+		
+		return this;
+	}
+	
 	public string function process( required string content, required struct args ) {
 		addStyle(variables.transport.theRequest.webRoot & 'plugins/google/style/map.css');
 		addScript('//maps.googleapis.com/maps/api/js?sensor=false');
