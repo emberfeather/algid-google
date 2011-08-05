@@ -2,6 +2,7 @@
 	"applicationSingletons": {
 	},
 	"applicationTransients": {
+		"formElementForGoogle": "plugins.google.inc.resource.structure.form.google"
 	},
 	"i18n": {
 		"locales": [
@@ -21,5 +22,5 @@
 	},
 	"sessionTransients": {
 	},
-	"version": "0.1.5"
+	"version": "0.1.6"
 }

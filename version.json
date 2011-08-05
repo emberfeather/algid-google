@@ -1,8 +1,8 @@
 {
-	"archive": "http://github.com/emberfeather/algid-google/tarball/0.1.5",
+	"archive": "http://github.com/emberfeather/algid-google/tarball/0.1.6",
 	"key": "google",
 	"releaseNotes": "http://github.com/emberfeather/algid-google/wiki/Release-Notes",
 	"title": "Google",
 	"URL": "http://github.com/emberfeather/algid-google",
-	"version": "0.1.5"
+	"version": "0.1.6"
 }
