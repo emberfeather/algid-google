@@ -10,7 +10,7 @@ component extends="plugins.widget.inc.resource.base.widget" {
 	public string function process( required string content, required struct args ) {
 		addStyle(variables.transport.theRequest.webRoot & 'plugins/google/style/map.css');
 		addScript('//maps.googleapis.com/maps/api/js?sensor=false');
-		addScript(variables.transport.theRequest.webRoot & 'plugins/google/script/jquery.map.js');
+		addScript(variables.transport.theRequest.webRoot & 'plugins/google/script/map.js');
 		
 		local.formatted = '<div class="google map" ';
 		
