@@ -11,47 +11,54 @@
  *     - http://google.com/analytics
  */
 var _gaq = _gaq || [];
-
-require(['jquery'], function(jQuery) {
-	(function($) {
-		var settings;
+(function(factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD Registration
+		define('plugins/prehealth/script/compare', [
+			'jquery'
+		], factory);
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+}(function($) {
+	var settings;
+	
+	$(function (){
+		settings = $.extend({
+			callback: undefined
+		}, $.track.settings);
 		
-		$(function (){
-			settings = $.extend({
-				callback: undefined
-			}, $.track.settings);
-			
-			$.ajax({
-				type : "GET",
-				url : (
-						"https:" === document.location.protocol ?
-						"https://ssl." :
-						"http://www."
-					) +
-					'google-analytics.com/ga.js',
-				success : settings.callback,
-				dataType : "script",
-				cache : true
-			});
+		$.ajax({
+			type : "GET",
+			url : (
+					"https:" === document.location.protocol ?
+					"https://ssl." :
+					"http://www."
+				) +
+				'google-analytics.com/ga.js',
+			success : settings.callback,
+			dataType : "script",
+			cache : true
 		});
-		
-		/**
-		 * Add an analytics command to the queue.
-		 * 
-		 * See the API documentation for the available commands and arguments:
-		 *     - http://code.google.com/apis/analytics/docs/gaJS/gaJSApi.html
-		 * 
-		 * commandName - string or function. Name of the command to push or a function to push
-		 * [arguments]* - any. Additional arguments to be passed to the command
-		 */
-		$.track = function(command) {
-			if($.isFunction(command)) {
-				_gaq.push(command);
-			} else {
-				_gaq.push(Array.prototype.slice.call(arguments));
-			}
-		};
-		
-		$.track.settings = {};
-	}(jQuery));
-});
+	});
+	
+	/**
+	 * Add an analytics command to the queue.
+	 * 
+	 * See the API documentation for the available commands and arguments:
+	 *     - http://code.google.com/apis/analytics/docs/gaJS/gaJSApi.html
+	 * 
+	 * commandName - string or function. Name of the command to push or a function to push
+	 * [arguments]* - any. Additional arguments to be passed to the command
+	 */
+	$.track = function(command) {
+		if($.isFunction(command)) {
+			_gaq.push(command);
+		} else {
+			_gaq.push(Array.prototype.slice.call(arguments));
+		}
+	};
+	
+	$.track.settings = {};
+}));
